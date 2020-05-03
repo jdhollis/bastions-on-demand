@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-profile=${1}
+profile=${1:-default}
 region=${2:-us-east-1}
 
 account_id=$(aws sts get-caller-identity --region ${region} --profile ${profile} --query '[Account]' --output text)
