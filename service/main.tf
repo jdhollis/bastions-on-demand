@@ -2,11 +2,6 @@ provider "template" {
   version = "~> 2.1"
 }
 
-data "terraform_remote_state" "bastion" {
-  backend = "s3"
-  # …
-}
-
 resource "aws_cloudwatch_log_group" "bastion" {
   name = "bastion"
 }
@@ -40,7 +35,7 @@ data "aws_iam_policy_document" "execution_role" {
       "ecr:GetDownloadUrlForLayer",
     ]
 
-    resources = [data.terraform_remote_state.bastion.outputs.repository_arn]
+    resources = [var.image_repository_arn]
   }
 
   statement {
@@ -77,8 +72,8 @@ data "template_file" "container_definitions" {
   template = file("${path.module}/container-definitions.tpl.json")
 
   vars = {
-    assume_role_for_authorized_keys = data.terraform_remote_state.bastion.outputs.public_key_fetcher_role_arn
-    image                           = "${data.terraform_remote_state.bastion.outputs.repository_url}:latest"
+    assume_role_for_authorized_keys = var.public_key_fetcher_role_arn
+    image                           = "${var.image_repository_url}:latest"
     log_group_name                  = aws_cloudwatch_log_group.bastion.name
     name                            = "bastion"
     region                          = var.region

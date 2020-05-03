@@ -1,3 +1,7 @@
+variable "image_repository_arn" {}
+variable "image_repository_url" {}
+variable "public_key_fetcher_role_arn" {}
+
 variable "public_subnet_ids" {
   type = list(string)
 }
