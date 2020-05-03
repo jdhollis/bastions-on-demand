@@ -26,7 +26,7 @@ data "aws_iam_policy_document" "bastion_task_role" {
   # Add any other permissions needed here
 }
 
-module "bastion" {
+module "bastion_service" {
   source = "./service"
 
   image_repository_arn          = module.bastion.repository_arn
