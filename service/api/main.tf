@@ -11,6 +11,7 @@ resource "aws_api_gateway_deployment" "bastion" {
   ]
 
   rest_api_id = aws_api_gateway_rest_api.bastion.id
+  stage_name  = "demo"
 }
 
 resource "aws_api_gateway_method_settings" "bastion" {
