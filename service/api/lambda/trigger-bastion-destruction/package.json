@@ -5,6 +5,6 @@
   "repository": "https://github.com/NuID/ethereum-registration/bastion/api/lambda/trigger-bastion-destruction",
   "private": true,
   "devDependencies": {
-    "aws-sdk": "2.290.0"
+    "aws-sdk": "2.668.0"
   }
 }
