@@ -1,0 +1,25 @@
+[
+  {
+    "name": "${name}",
+    "image": "${image}",
+    "portMappings": [
+      {
+        "containerPort": 22
+      }
+    ],
+    "environment": [
+      {
+        "name": "ASSUME_ROLE_FOR_AUTHORIZED_KEYS",
+        "value": "${assume_role_for_authorized_keys}"
+      }
+    ],
+    "logConfiguration": {
+      "logDriver": "awslogs",
+      "options": {
+        "awslogs-group": "${log_group_name}",
+        "awslogs-region": "${region}",
+        "awslogs-stream-prefix": "ssh"
+      }
+    }
+  }
+]

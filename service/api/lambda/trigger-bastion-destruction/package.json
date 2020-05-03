@@ -1,0 +1,10 @@
+{
+  "name": "trigger-bastion-destruction",
+  "version": "0.1.0-SNAPSHOT",
+  "description": "trigger-bastion-destruction",
+  "repository": "https://github.com/NuID/ethereum-registration/bastion/api/lambda/trigger-bastion-destruction",
+  "private": true,
+  "devDependencies": {
+    "aws-sdk": "2.290.0"
+  }
+}
