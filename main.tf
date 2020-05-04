@@ -23,7 +23,9 @@ data "aws_iam_policy_document" "bastion_task_role" {
     resources = [module.bastion.public_key_fetcher_role_arn]
   }
 
+  #
   # Add any other permissions needed here
+  #
 }
 
 module "bastion_service" {
