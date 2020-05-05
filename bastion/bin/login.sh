@@ -1,12 +1,15 @@
 #!/usr/bin/env bash
 
-profile=${1:-default}
-region=${2:-us-east-1}
+cd "$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)/../.." # Start from a consistent working directory
 
-account_id=$(aws sts get-caller-identity --region ${region} --profile ${profile} --query '[Account]' --output text)
+echo "Fetching account ID..."
+account_id=$(aws sts get-caller-identity --query '[Account]' --output text)
 
+echo "Fetching bastion region..."
+region=$(terraform output region)
+
+echo "Logging into ECR..."
 aws ecr get-login-password \
-  --profile ${profile} \
   --region ${region} \
 | docker login \
     --username AWS \
