@@ -14,7 +14,7 @@ then
   fi
 
   echo "Destroying bastion..."
-  INVOKE_URL=${invoke_url} bundle exec ruby destroy.rb && rm .bastion-ip
+  INVOKE_URL=${invoke_url} cd service && bundle exec ruby destroy.rb && rm .bastion-ip
 fi
 
 echo "Done"
