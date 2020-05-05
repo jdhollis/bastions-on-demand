@@ -2,7 +2,7 @@
 
 cd "$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)/../.." # Start from a consistent working directory
 
-if [[ -f ".bastion-ip" ]]
+if [[ -f "service/.bastion-ip" ]]
 then
   echo "Fetching bastion service endpoint..."
   invoke_url=$(terraform output bastion_service_endpoint)
