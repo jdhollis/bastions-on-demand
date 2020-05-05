@@ -22,15 +22,17 @@ RUN echo "Installing dependencies..." && \
   rm -R awscli-bundle && \
   /usr/local/bin/aws --version
 
-RUN echo "Unlocking root account..." && \
-  sed -i "s/root:!::0:::::/root:*::0:::::/g" /etc/shadow
+RUN echo "Creating user \"pilot\"..." && \
+  adduser pilot --disabled-password
+
+RUN echo "Unlocking \"pilot\"..." && \
+  sed -i "s/pilot:!::0:::::/pilot:*::0:::::/g" /etc/shadow
 
 RUN echo "Configuring sshd..." && \
   sed -i "s:#AuthorizedKeysCommand none:AuthorizedKeysCommand /usr/local/bin/fetch_authorized_keys.sh:g" /etc/ssh/sshd_config && \
   sed -i "s:#AuthorizedKeysCommandUser nobody:AuthorizedKeysCommandUser nobody:g" /etc/ssh/sshd_config && \
   sed -i "s:#GatewayPorts no:GatewayPorts yes:g" /etc/ssh/sshd_config && \
   sed -i "s:#PasswordAuthentication yes:PasswordAuthentication no:g" /etc/ssh/sshd_config && \
-  sed -i "s:#PermitRootLogin prohibit-password:PermitRootLogin prohibit-password:g" /etc/ssh/sshd_config && \
   sed -i "s:#PermitTunnel no:PermitTunnel yes:g" /etc/ssh/sshd_config && \
   sed -i "s:AllowTcpForwarding no:AllowTcpForwarding yes:g" /etc/ssh/sshd_config && \
   sed -i "s:AuthorizedKeysFile	.ssh/authorized_keys:AuthorizedKeysFile	none:g" /etc/ssh/sshd_config
