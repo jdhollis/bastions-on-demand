@@ -44,3 +44,54 @@ resource "aws_subnet" "public_az_a" {
     Name = "bastions-on-demand-demo-public-az-a"
   }
 }
+
+#
+# NAT Gateway
+
+#
+# AZ A
+#
+
+resource "aws_eip" "nat_az_a" {
+  depends_on = [aws_internet_gateway.demo]
+  vpc        = true
+
+  tags = {
+    Name = "bastions-on-demand-demo-nat-az-a"
+  }
+}
+
+resource "aws_nat_gateway" "az_a" {
+  allocation_id = aws_eip.nat_az_a.id
+  subnet_id     = aws_subnet.public_az_a.id
+
+  tags = {
+    Name = "bastions-on-demand-demo-nat-az-a"
+  }
+}
+
+#
+# Routing
+
+#
+# Public
+#
+
+resource "aws_route_table" "public" {
+  vpc_id = aws_vpc.demo.id
+
+  tags = {
+    Name = "bastions-on-demand-demo-public"
+  }
+}
+
+resource "aws_route" "igw" {
+  route_table_id         = aws_route_table.public.id
+  destination_cidr_block = "0.0.0.0/0"
+  gateway_id             = aws_internet_gateway.demo.id
+}
+
+resource "aws_route_table_association" "public_az_a" {
+  route_table_id = aws_route_table.public.id
+  subnet_id      = aws_subnet.public_az_a.id
+}
