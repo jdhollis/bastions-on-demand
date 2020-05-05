@@ -11,8 +11,10 @@ then
   exit 1
 fi
 
+cd service
+
 echo "Creating bastion..."
-INVOKE_URL=${invoke_url} cd service && bundle exec ruby create.rb | jq -r .ip > .bastion-ip
+INVOKE_URL=${invoke_url} bundle exec ruby create.rb | jq -r .ip > .bastion-ip
 
 if [[ $(cat .bastion-ip) == "null" ]]
 then
