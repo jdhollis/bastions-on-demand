@@ -35,7 +35,7 @@ RUN echo "Configuring sshd..." && \
   sed -i "s:#PasswordAuthentication yes:PasswordAuthentication no:g" /etc/ssh/sshd_config && \
   sed -i "s:#PermitTunnel no:PermitTunnel yes:g" /etc/ssh/sshd_config && \
   sed -i "s:AllowTcpForwarding no:AllowTcpForwarding yes:g" /etc/ssh/sshd_config && \
-  sed -i "s:AuthorizedKeysFile	.ssh/authorized_keys:AuthorizedKeysFile	none:g" /etc/ssh/sshd_config
+  sed -i "s:AuthorizedKeysFile .ssh/authorized_keys:AuthorizedKeysFile none:g" /etc/ssh/sshd_config
 
 ENTRYPOINT [ "/sbin/tini", "--" ]
 CMD [ "/bin/sh", "/usr/local/bin/entrypoint.sh" ]
