@@ -1,8 +1,8 @@
 # Bastions on Demand
 
-This is a fully functional example of how to create and destroy bastion instances on demand using ECS.
+This is a fully functional example of how to create and destroy bastion instances on demand using [Fargate](https://aws.amazon.com/fargate/).
 
-For an in-depth guide to this example, check out [Bastions on Demand](https://theconsultingcto.com/posts/bastions-on-demand) on my site.
+For an in-depth guide to this example, check out ["Bastions on Demand"](https://theconsultingcto.com/posts/bastions-on-demand) on my site.
 
 ## Preliminaries
 
@@ -23,7 +23,7 @@ You will also need to upload your public SSH key to your IAM user using either t
 
 ## Setup
 
-If you haven't previously configured a CloudWatch role for API Gateway, then use the [`api-gateway-logger`](https://github.com/jdhollis/bastions-on-demand/tree/master/api-gateway-logger) module to do so now:
+If you haven't previously configured [a CloudWatch role for API Gateway](https://aws.amazon.com/premiumsupport/knowledge-center/api-gateway-cloudwatch-logs/), then use the [`api-gateway-logger`](https://github.com/jdhollis/bastions-on-demand/tree/master/api-gateway-logger) module to do so now:
 
 ```bash
 cd api-gateway-logger
