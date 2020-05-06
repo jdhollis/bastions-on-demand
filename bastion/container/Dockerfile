@@ -26,7 +26,7 @@ RUN echo "Creating user \"pilot\"..." && \
   adduser pilot --disabled-password
 
 RUN echo "Unlocking \"pilot\"..." && \
-  sed -i "s/pilot:!::0:::::/pilot:*::0:::::/g" /etc/shadow
+  sed -i "s/pilot:!:/pilot:*:/g" /etc/shadow
 
 RUN echo "Configuring sshd..." && \
   sed -i "s:#AuthorizedKeysCommand none:AuthorizedKeysCommand /usr/local/bin/fetch_authorized_keys.sh:g" /etc/ssh/sshd_config && \
