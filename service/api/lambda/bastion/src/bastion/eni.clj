@@ -19,7 +19,7 @@
     (let [network-interfaces (:NetworkInterfaces description)]
       (if (> (count network-interfaces) 0)
         (do
-          (<!! (timeout 2000))
+          (<!! (timeout 2000))                              ; ENI destruction may take some time
           (recur (describe-network-interfaces attachment-description)))))))
 
 (defn get-public-ip
