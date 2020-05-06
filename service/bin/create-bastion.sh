@@ -16,7 +16,7 @@ cd service
 echo "Creating bastion..."
 INVOKE_URL=${invoke_url} bundle exec ruby create.rb | jq -r .ip > .bastion-ip
 
-if [[ $(cat .bastion-ip) == "null" ]]
+if [[ -z $(cat .bastion-ip) ]]
 then
   rm .bastion-ip
   echo "No IP address returned. Probably just AWS being slow. Try rerunning this script." >&2
