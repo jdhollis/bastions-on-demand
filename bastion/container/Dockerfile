@@ -22,11 +22,11 @@ RUN echo "Installing dependencies..." && \
   rm -R awscli-bundle && \
   /usr/local/bin/aws --version
 
-RUN echo "Creating user \"pilot\"..." && \
-  adduser pilot --disabled-password
+RUN echo "Creating user \"ops\"..." && \
+  adduser ops --disabled-password
 
-RUN echo "Unlocking \"pilot\"..." && \
-  sed -i "s/pilot:!:/pilot:*:/g" /etc/shadow
+RUN echo "Unlocking \"ops\"..." && \
+  sed -i "s/ops:!:/ops:*:/g" /etc/shadow
 
 RUN echo "Configuring sshd..." && \
   sed -i "s:#AuthorizedKeysCommand none:AuthorizedKeysCommand /usr/local/bin/fetch_authorized_keys.sh:g" /etc/ssh/sshd_config && \
