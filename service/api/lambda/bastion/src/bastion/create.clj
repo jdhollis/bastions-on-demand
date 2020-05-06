@@ -2,6 +2,7 @@
   (:gen-class
     :implements [com.amazonaws.services.lambda.runtime.RequestStreamHandler])
   (:require [clojure.java.io :as io]
+            [clojure.string :as cs]
             [cheshire.core :as json]
             [bastion.sg :as sg]
             [bastion.task :as task]))
@@ -28,7 +29,7 @@
   [_ input-stream output-stream _]
   (let [event (json/parse-stream (io/reader input-stream) true)
         cidr-ip (str (get-in event [:requestContext :identity :sourceIp]) "/32")
-        user (get-in event [:requestContext :identity :user])]
+        user (last (cs/split (get-in event [:requestContext :identity :userArn]) #"/"))]
     (if-let [security-group-id (sg/get-id-for user)]
       (if (sg/ip-matches? security-group-id cidr-ip)
         (if-let [task (task/get-for user)]

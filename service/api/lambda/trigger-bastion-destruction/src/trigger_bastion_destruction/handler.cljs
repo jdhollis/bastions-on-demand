@@ -1,5 +1,6 @@
 (ns trigger-bastion-destruction.handler
-  (:require [cljs.nodejs :as node]))
+  (:require [clojure.string :as cs]
+            [cljs.nodejs :as node]))
 
 (node/enable-util-print!)
 
@@ -18,7 +19,7 @@
 (defn ^:export handle-request
   [event _ callback]
   (let [event (js->clj event :keywordize-keys true)
-        user (get-in event [:requestContext :identity :user])
+        user (last (cs/split (get-in event [:requestContext :identity :userArn]) #"/"))
         payload (.stringify js/JSON (clj->js {:user user}))]
     (.invoke lambda
              (clj->js {:FunctionName   destroy-bastion-function-name
