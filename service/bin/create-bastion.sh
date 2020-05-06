@@ -19,7 +19,7 @@ INVOKE_URL=${invoke_url} bundle exec ruby create.rb | jq -r .ip > .bastion-ip
 if [[ -z $(cat .bastion-ip) ]]
 then
   rm .bastion-ip
-  echo "No IP address returned. Probably just AWS being slow. Try rerunning this script." >&2
+  echo "No IP address returned. Probably just AWS being slow. Try re-running this script." >&2
   exit 1
 else
   echo "Done"
