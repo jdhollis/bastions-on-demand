@@ -33,7 +33,7 @@ terraform apply plan && rm plan
 cd ..
 ``` 
 
-This is a global account setting, so you should only have to do it once. Note that destroying that module's resources with Terraform will remove the role, but [it will not reset the CloudWatch role setting for API Gateway](https://www.terraform.io/docs/providers/aws/r/api_gateway_account.html).
+This is a global account setting, so you should only have to do it once. Note that destroying the module's resources with Terraform will remove the role, but [it will not reset the CloudWatch role setting for API Gateway](https://www.terraform.io/docs/providers/aws/r/api_gateway_account.html).
 
 Now we're ready to create the service.
 
