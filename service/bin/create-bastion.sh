@@ -23,5 +23,5 @@ then
   exit 1
 else
   echo "Done"
-  cat .bastion-ip
+  echo "pilot@$(cat .bastion-ip)"
 fi
