@@ -91,7 +91,7 @@ resource "aws_lambda_function" "create_bastion" {
   role             = aws_iam_role.create_bastion.arn
   runtime          = "java8"
   source_code_hash = filebase64sha256("${path.module}/target/create-bastion.jar")
-  timeout          = 30
+  timeout          = 120
 
   environment {
     variables = {
